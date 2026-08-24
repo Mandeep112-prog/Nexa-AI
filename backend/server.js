@@ -19,7 +19,7 @@ import mongoose, { connect } from "mongoose"
 import chatRoutes from "./routes/chat.js";
 
 const app = express();
-const PORT = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
@@ -40,8 +40,8 @@ const connectDB = async () => {
 const startServer = async () => {
     await connectDB();
 
-    app.listen(PORT, () => {
-        console.log(`Server is running on ${PORT}`);
+    app.listen(port, () => {
+        console.log(`Server is running on ${port}`);
     });
 };
 
