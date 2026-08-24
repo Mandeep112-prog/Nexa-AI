@@ -1,8 +1,7 @@
 import "dotenv/config";
 
-const getGeminiAPIResponse = async (message) =>{
-     try {
-
+const getGeminiAPIResponse = async (message) => {
+  try {
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
@@ -15,17 +14,21 @@ const getGeminiAPIResponse = async (message) =>{
           model: "gemini-3.6-flash",
           input: message,
         }),
-      }
+      },
     );
 
     const data = await response.json();
+    console.log(data);
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || "Gemini API request failed");
+    }
     console.log(data.steps[1].content[0].text);
     return data.steps[1].content[0].text;
-
   } catch (error) {
     console.error(error);
     throw error;
   }
-}
+};
 
 export default getGeminiAPIResponse;
