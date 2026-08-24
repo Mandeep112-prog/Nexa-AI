@@ -61,6 +61,7 @@ router.delete("/thread/:threadId", async (req,res)=>{
         console.log(err);
         res.status(500).json({error : "failed to delete thread"})
     }
+    
 });
 
 router.post("/chat",async(req,res)=>{
